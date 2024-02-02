@@ -1,0 +1,100 @@
+body {
+  background-color: #fff;
+}
+
+header,
+main,
+footer {
+  background-color: #064534;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar {
+  background-color: #064534 !important;
+  border-radius: 10px;
+}
+
+h2,
+h3 {
+  color: #000;
+}
+
+img {
+  border-radius: 15px;
+}
+
+h1,
+p {
+  color: #fff;
+}
+
+.aside-class {
+  background-color: #c1e0c7;
+  border-radius: 15px;
+  padding: 1%;
+}
+
+.blog-post {
+  background-color: #c1e0c7;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+li {
+  color: #fff !important;
+  border-color: #fff !important;
+}
+.no-deco {
+  text-decoration: none !important;
+  padding: 0 11px;
+  text-align: center;
+}
+
+.full-height {
+  height: 100vh;
+}
+
+/* Styles pour le formulaire d'inscription */
+.card {
+  background-color: #ffffff; /* Fond blanc pour la carte */
+  border: 2px solid #064534; /* Bordure verte */
+}
+
+.card-header {
+  background-color: #064534; /* Fond vert pour l'en-tête de la carte */
+  color: #ffffff; /* Texte blanc pour l'en-tête de la carte */
+}
+
+.card-body {
+  background-color: #ffffff; /* Fond blanc pour le corps de la carte */
+}
+
+.form-group label {
+  color: #064534; /* Couleur du texte vert pour les étiquettes de formulaire */
+}
+
+.form-control {
+  border: 2px solid #064534; /* Bordure verte pour les champs de formulaire */
+}
+
+.btn-primary {
+  background-color: #e88013; /* Fond orange pour le bouton */
+  border-color: #e88013; /* Bordure orange pour le bouton */
+  color: #ffffff; /* Texte blanc pour le bouton */
+}
+
+input:focus {
+  border-color: #064534 !important;
+}
+
+.btn-primary:hover {
+  background-color: #064534;
+  border-color: #064534;
+  color: #ffffff;
+}
+
+/* Ajoutez d'autres styles si nécessaire */
