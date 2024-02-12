@@ -1,16 +1,23 @@
 <?php
+
+namespace App\Models;
+
+use PDO;
+use PDOException;
+
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-require_once(dirname(__FILE__) . '/../model/Database.php');
+require_once(dirname(__FILE__) . '/../Models/Database.php');
 
-class Crud extends Database
+class UserModel extends Database
 {
 
 
-
+    // inscription
     public function insertDataUser($firstName, $lastName, $email, $password, $role)
     {
         $db =  $this->getConnection();
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
         $insertSql = "INSERT INTO utilisateur (nom, prenom, email, mot_de_passe, role)  VALUES (:nom, :prenom, :email, :password, :role )";
 
@@ -18,7 +25,7 @@ class Crud extends Database
         $statement->bindParam(':nom', $lastName);
         $statement->bindParam(':prenom', $firstName);
         $statement->bindParam(':email', $email);
-        $statement->bindParam(':password', $password);
+        $statement->bindParam(':password', $hashedPassword);
         $statement->bindParam(':role', $role);
 
         try {
@@ -28,5 +35,23 @@ class Crud extends Database
             echo "Erreur d'insertion : " . $e->getMessage();
             return false;
         }
+    }
+
+
+
+    public function userExists($email)
+    {
+        $db = $this->getConnection();
+
+        $selectSql = "SELECT COUNT(*) FROM utilisateur WHERE email = :email";
+
+        $statement = $db->prepare($selectSql);
+        $statement->bindParam(':email', $email);
+
+        $statement->execute();
+
+        $count = $statement->fetchColumn();
+
+        return $count > 0;
     }
 }

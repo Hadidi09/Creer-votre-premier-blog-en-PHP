@@ -1,5 +1,6 @@
 body {
   background-color: #fff;
+  margin: 0;
 }
 
 header,
@@ -10,6 +11,11 @@ footer {
   margin: 20px 0;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+footer {
+ 
+  padding: 5px !important;
 }
 
 .navbar {
@@ -58,33 +64,31 @@ li {
   height: 100vh;
 }
 
-/* Styles pour le formulaire d'inscription */
 .card {
-  background-color: #ffffff; /* Fond blanc pour la carte */
-  border: 2px solid #064534; /* Bordure verte */
+  background-color: #ffffff; 
+  border: 2px solid #064534;
 }
 
 .card-header {
-  background-color: #064534; /* Fond vert pour l'en-tête de la carte */
-  color: #ffffff; /* Texte blanc pour l'en-tête de la carte */
+  background-color: #064534; 
+  color: #ffffff; 
 }
 
 .card-body {
-  background-color: #ffffff; /* Fond blanc pour le corps de la carte */
+  background-color: #ffffff; 
 }
 
 .form-group label {
-  color: #064534; /* Couleur du texte vert pour les étiquettes de formulaire */
-}
+  color: #064534; 
 
 .form-control {
-  border: 2px solid #064534; /* Bordure verte pour les champs de formulaire */
+  border: 2px solid #064534; 
 }
 
 .btn-primary {
-  background-color: #e88013; /* Fond orange pour le bouton */
-  border-color: #e88013; /* Bordure orange pour le bouton */
-  color: #ffffff; /* Texte blanc pour le bouton */
+  background-color: #e88013; 
+  border-color: #e88013; 
+  color: #ffffff; 
 }
 
 input:focus {
@@ -97,4 +101,3 @@ input:focus {
   color: #ffffff;
 }
 
-/* Ajoutez d'autres styles si nécessaire */

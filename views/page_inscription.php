@@ -18,7 +18,7 @@ ini_set('display_errors', 1);
 
 <body>
 
-    <?php require_once('../templates/header.php'); ?>
+    <?php require_once __DIR__ . '/templates/header.php'; ?>
     <div class="container mt-5  full-height">
         <div class="row justify-content-center">
             <div class="col-md-6">
@@ -27,7 +27,7 @@ ini_set('display_errors', 1);
                         <h3 class="text-center text-white">Inscription</h3>
                     </div>
                     <div class="card-body">
-                        <form action="../src/controllers/CrudControllers.php" method="post">
+                        <form action="../src/controllers/CrudControllers.php?action=inscription" method="post">
                             <div class="form-group">
                                 <label for="lastname">Nom </label>
                                 <input type="text" class="form-control focus-ring focus-ring-success" name="lastname" required>
@@ -56,7 +56,7 @@ ini_set('display_errors', 1);
             </div>
         </div>
     </div>
-    <?php require_once('../templates/footer.php'); ?>
+    <?php require_once __DIR__ . '/templates/footer.php'; ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 
