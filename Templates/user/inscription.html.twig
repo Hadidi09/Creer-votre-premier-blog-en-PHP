@@ -1,0 +1,41 @@
+{% extends "base.html.twig" %}
+{% block title %}
+    inscription
+{% endblock %}
+{% block body %}
+    
+
+    <div class="container-fluid mt-5 full-height">
+        <h1 class="text-center">Formulaire d'inscription</h1>
+
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form action="{{ handle_user_form}}" method="post">
+
+                    <div class="mb-3">
+                        <label for="firstname" class="form-label">Firstname:</label>
+                        <input type="text" class="form-control" id="firstname" name="firstname" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="lastname" class="form-label">lastname:</label>
+                        <input type="text" class="form-control" id="lastname" name="lastname" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email:</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password:</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    
+{% endblock %}
