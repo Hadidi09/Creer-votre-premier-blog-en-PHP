@@ -26,8 +26,11 @@ if (!empty($method)  && !empty($path)) {
         case "/":
             echo "hello boys ";
             break;
-        case "/signup":
-            echo $userController->insertData();
+        case "/inscription":
+            echo $userController->UserSignupForm();
+            break;
+        case "/connexion":
+            echo $userController->UserLoginForm();
             break;
         default:
             echo "error not found ";
