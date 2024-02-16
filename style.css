@@ -29,7 +29,7 @@ footer {
 
 h2,
 h3 {
-  color: #000;
+  color: #fff;
 }
 
 img {
@@ -39,6 +39,13 @@ img {
 h1,
 p {
   color: #fff;
+}
+input:focus {
+  border-color: #064534 !important;
+}
+li {
+  color: #fff !important;
+  border-color: #fff !important;
 }
 
 .aside-class {
@@ -54,10 +61,6 @@ p {
   border-radius: 8px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 }
-li {
-  color: #fff !important;
-  border-color: #fff !important;
-}
 .no-deco {
   text-decoration: none !important;
   padding: 0 11px;
@@ -69,21 +72,27 @@ li {
 }
 
 .card {
-  background-color: #ffffff;
+  background-color: #064534;
   border: 2px solid #064534;
 }
 
 .card-header {
   background-color: #064534;
-  color: #ffffff;
+  color: #fff;
 }
 
 .card-body {
-  background-color: #ffffff;
+  background-color: #e88013;
+  color: #fff;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
 }
 
 .form-group label {
-  color: #064534;
+  color: #fff;
 }
 .form-control {
   border: 2px solid #064534;
@@ -92,19 +101,15 @@ li {
 .btn-primary {
   background-color: #064534;
   border-color: #e88013;
-  color: #ffffff;
+  color: #fff;
 }
-
-input:focus {
-  border-color: #064534 !important;
-}
-
 .btn-primary:hover {
   background-color: #01241a;
   border-color: #064534;
-  color: #ffffff;
-}
-
-label {
   color: #fff;
+}
+.btn-read {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

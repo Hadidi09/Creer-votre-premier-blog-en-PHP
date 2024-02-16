@@ -4,6 +4,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+use App\Controllers\BlogController;
 use App\Models\Database;
 use App\Controllers\UserController;
 
@@ -21,10 +22,11 @@ $path = $_SERVER['REQUEST_URI'];
 if (!empty($method)  && !empty($path)) {
 
     $userController = new UserController($connection);
+    $blogController = new BlogController();
 
     switch ($path) {
         case "/":
-            echo "hello boys ";
+            echo $blogController->homePage();
             break;
         case "/inscription":
             echo $userController->UserSignupForm();
