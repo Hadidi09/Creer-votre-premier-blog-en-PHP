@@ -54,4 +54,30 @@ class UserModel extends Database
 
         return $count > 0;
     }
+
+    public function authenticateUser($email, $password): bool
+    {
+        $db = $this->getConnection();
+        try {
+            $selectSql =  'SELECT * FROM utilisateur WHERE email = :email';
+            $statement = $db->prepare($selectSql);
+            $statement->bindParam(':email', $email, PDO::PARAM_STR);
+            $statement->execute();
+
+            $user = $statement->fetch(PDO::FETCH_ASSOC);
+            // var_dump($user);
+            echo $password;
+            if (
+                $user && isset($user['mot_de_passe']) && $user['mot_de_passe']
+                !== null && password_verify($password, $user['mot_de_passe'])
+            ) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            echo "Erreur PDO: " . $e->getMessage();
+            return false;
+        }
+    }
 }
