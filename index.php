@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -21,7 +21,7 @@ $path = $_SERVER['REQUEST_URI'];
 
 if (!empty($method)  && !empty($path)) {
 
-    $userController = new UserController($connection);
+    $userController = new UserController();
     $blogController = new BlogController();
 
     switch ($path) {
@@ -33,6 +33,9 @@ if (!empty($method)  && !empty($path)) {
             break;
         case "/connexion":
             echo $userController->UserLoginForm();
+            break;
+        case "/contact":
+            echo $blogController->SendContactMessage();
             break;
         default:
             echo "error not found ";

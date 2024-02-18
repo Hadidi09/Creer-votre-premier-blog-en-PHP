@@ -113,3 +113,7 @@ li {
   justify-content: center;
   align-items: center;
 }
+.contact {
+  background-color: #e88013;
+  border-radius: 15px;
+}

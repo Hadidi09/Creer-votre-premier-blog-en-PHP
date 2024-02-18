@@ -96,6 +96,39 @@
                         </div>
                     </div> 
                 </div>
+                <div class="row">
+                    <div class="row justify-content-center text-white">
+                        <div class="col-md-6 contact">
+                        <h3 class="text-center" id="#contact">Contact</h3>
+                            <form action="{{ ('/contact')}}" method="post">
+
+                                <div class="mb-3">
+                                    <label for="firstname" class="form-label">Prenom:</label>
+                                    <input type="text" class="form-control" id="firstname" name="firstname" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="lastname" class="form-label">Nom:</label>
+                                    <input type="text" class="form-control" id="lastname" name="lastname" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email:</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="message">Message</label>
+                                    <textarea class="form-control" placeholder="Entrez votre message ici" name="message" id="message" style="height: 100px"></textarea>
+                                    
+                                </div>
+                                
+                                <div class="btn-read">
+                                    <button type="submit" class="btn btn-primary mt-3 mb-3 btn-contact">Envoyer</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>              
         </main>
     </div>
