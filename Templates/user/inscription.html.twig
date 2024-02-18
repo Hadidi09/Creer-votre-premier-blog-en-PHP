@@ -3,8 +3,6 @@
     inscription
 {% endblock %}
 {% block body %}
-    
-
     <div class="container-fluid mt-5 full-height">
         <h1 class="text-center">Formulaire d'inscription</h1>
 
@@ -13,11 +11,11 @@
                 <form action="{{ handle_user_form}}" method="post">
 
                     <div class="mb-3">
-                        <label for="firstname" class="form-label">Firstname:</label>
+                        <label for="firstname" class="form-label">Prenom:</label>
                         <input type="text" class="form-control" id="firstname" name="firstname" required>
                     </div>
                     <div class="mb-3">
-                        <label for="lastname" class="form-label">lastname:</label>
+                        <label for="lastname" class="form-label">Nom:</label>
                         <input type="text" class="form-control" id="lastname" name="lastname" required>
                     </div>
 
@@ -31,11 +29,9 @@
                         <input type="password" class="form-control" id="password" name="password" required>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Envoyer</button>
                 </form>
             </div>
         </div>
-    </div>
-
-    
+    </div>   
 {% endblock %}

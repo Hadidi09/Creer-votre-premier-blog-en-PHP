@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\UserModel;
+use App\Controllers\Controller;
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -43,8 +44,7 @@ class UserController extends Controller
                 }
             }
         }
-
-        $this->twig->display('user/inscription.html.twig');
+        $this->renderTwigView('user/inscription.html.twig');
     }
     public function UserLoginForm()
     {
@@ -68,11 +68,11 @@ class UserController extends Controller
 
             if ($authenticated) {
                 echo 'connexion reussie !';
-                // header('Location: /acceuil');
+                header('Location: /');
             } else {
                 echo 'Mauvaise combinaison email/mot de passe';
             }
         }
-        $this->twig->display('user/connexion.html.twig');
+        $this->renderTwigView('user/connexion.html.twig');
     }
 }
