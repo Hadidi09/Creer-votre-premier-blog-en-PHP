@@ -78,4 +78,20 @@ class BlogModel extends Database
             return false;
         }
     }
+
+    public function deleteBlog($blog_id)
+    {
+        $db = $this->getConnection();
+        $deleteSql = "DELETE FROM blog_post WHERE id = :blog_id";
+        $statement = $db->prepare($deleteSql);
+        $statement->bindParam(":blog_id", $blog_id);
+
+        try {
+            $statement->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
 }

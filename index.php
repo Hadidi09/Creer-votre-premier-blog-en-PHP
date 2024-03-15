@@ -35,6 +35,9 @@ if (!empty($method)  && !empty($path)) {
         case "connexion":
             echo $userController->userLoginForm();
             break;
+        case "deconnexion":
+            echo $userController->logout();
+            break;
         case "contact":
             echo $blogController->sendContactMessage();
             break;
@@ -58,6 +61,16 @@ if (!empty($method)  && !empty($path)) {
                 }
             }
             break;
+        case "delete_blog_id":
+            if (isset($get_Id[1]) && isset($get_Id[2])) {
+                $blog_id = $get_Id[2];
+                echo $blogController->delete_blog($blog_id);
+            } else {
+                echo $blogController->show404Error();
+            }
+            break;
+
+
 
         default:
             echo $blogController->show404Error();

@@ -21,7 +21,12 @@ class BlogController extends Controller
 
     public function homePage()
     {
-        $this->renderTwigView('main/acceuil.html.twig');
+        if (isset($_SESSION['connected']) && $_SESSION['connected'] == true) {
+            $this->renderTwigView('main/acceuil.html.twig');
+        } else {
+            header('Location: connexion');
+            exit();
+        }
     }
     public function sendContactMessage()
     {
@@ -165,5 +170,20 @@ class BlogController extends Controller
 
         $blog_id = $this->blogModel->get_Blog_post_Id($blog_id);
         $this->renderTwigView("blog/update_blog.html.twig", ['blog' => $blog_id]);
+    }
+
+    public function delete_blog($blog_id)
+    {
+        if (!isset($blog_id) || empty($blog_id)) {
+            echo "Identifiant du blog post non valide.";
+            return;
+        }
+        $success = $this->blogModel->deleteBlog($blog_id);
+        if ($success) {
+            header("Location: /blog_admin");
+            exit();
+        } else {
+            echo "Échec de la suppression du blog post";
+        }
     }
 }

@@ -18,6 +18,7 @@ abstract class Controller
             'debug' => true,
         ]);
         $this->twig->addExtension(new \Twig\Extension\DebugExtension());
+        $this->twig->addGlobal('user', $_SESSION['connected'] ?? null);
     }
 
     protected function renderTwigView($view, $data = [])

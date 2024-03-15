@@ -71,6 +71,12 @@ class UserModel extends Database
                 $user && isset($user['mot_de_passe']) && $user['mot_de_passe']
                 !== null && password_verify($password, $user['mot_de_passe'])
             ) {
+                $_SESSION['connected'] = [
+                    'prenom' => $user["prenom"] ?? null,
+                    'connected' => 'true',
+                    'role' => $user["role"] ?? null,
+                    'id' => $user["id"] ?? null,
+                ];
                 return true;
             } else {
                 return false;

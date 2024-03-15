@@ -75,4 +75,11 @@ class UserController extends Controller
         }
         $this->renderTwigView('user/connexion.html.twig');
     }
+
+    public function logout()
+    {
+        session_destroy();
+        header('/connexion');
+        exit();
+    }
 }
