@@ -7,23 +7,35 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            {# {% data %} #}
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
+                {% if user.connected is same as('true')%}
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/">Page d'accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/listes">Liste des blogs</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/inscription">inscription</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/connexion">Connexion</a>
+                        <a class="nav-link" href="listes">Liste des blogs</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#contact">Contact</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="deconnexion">Deconnexion</a>
+                    </li>
+                    {% if user.connected is same as('true')%}
+                    <li class="nav-item">
+                        <a class="nav-link" href="admin">Admin</a>
+                    </li>
+                    {% endif %}
+                {% else %}    
+                    <li class="nav-item">
+                        <a class="nav-link" href="inscription">inscription</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="connexion">Connexion</a>
+                    </li>
+                {% endif %}    
                 </ul>
             </div>
         </div>

@@ -7,7 +7,7 @@ use PDOException;
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-require_once(dirname(__FILE__) . '/../Models/Database.php');
+
 
 class UserModel extends Database
 {
@@ -71,6 +71,12 @@ class UserModel extends Database
                 $user && isset($user['mot_de_passe']) && $user['mot_de_passe']
                 !== null && password_verify($password, $user['mot_de_passe'])
             ) {
+                $_SESSION['connected'] = [
+                    'prenom' => $user["prenom"] ?? null,
+                    'connected' => 'true',
+                    'role' => $user["role"] ?? null,
+                    'id' => $user["id"] ?? null,
+                ];
                 return true;
             } else {
                 return false;

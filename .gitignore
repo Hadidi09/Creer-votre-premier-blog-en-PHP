@@ -2,3 +2,4 @@ src/models/Configuration.php
 vendor
 ./idea
 ./index.html
+public/uploads/

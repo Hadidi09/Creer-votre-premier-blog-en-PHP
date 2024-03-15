@@ -18,26 +18,61 @@ $connection = $db->getConnection();
 
 $method = $_SERVER['REQUEST_METHOD'];
 $path = $_SERVER['REQUEST_URI'];
+$get_Id = explode("/", $path);
 
 if (!empty($method)  && !empty($path)) {
 
     $userController = new UserController();
     $blogController = new BlogController();
 
-    switch ($path) {
-        case "/":
+    switch ($get_Id[1]) {
+        case "":
             echo $blogController->homePage();
             break;
-        case "/inscription":
-            echo $userController->UserSignupForm();
+        case "inscription":
+            echo $userController->userSignupForm();
             break;
-        case "/connexion":
-            echo $userController->UserLoginForm();
+        case "connexion":
+            echo $userController->userLoginForm();
             break;
-        case "/contact":
-            echo $blogController->SendContactMessage();
+        case "deconnexion":
+            echo $userController->logout();
             break;
+        case "contact":
+            echo $blogController->sendContactMessage();
+            break;
+        case "admin":
+            echo $blogController->admin();
+            break;
+        case "blog_admin":
+            echo $blogController->blog_Admin();
+            break;
+        case "nouveau_blog_post":
+            echo $blogController->createBlog_post();
+            break;
+        case "update_blog_id":
+            if ($get_Id[1] === "update_blog_id" && isset($get_Id[2])) {
+
+                $blog_id = $get_Id[2];
+                if (isset($get_Id[1]) && $get_Id[1] === "update_blog_id") {
+                    echo $blogController->update_blog_post($blog_id);
+                } else {
+                    echo $blogController->show404Error();
+                }
+            }
+            break;
+        case "delete_blog_id":
+            if (isset($get_Id[1]) && isset($get_Id[2])) {
+                $blog_id = $get_Id[2];
+                echo $blogController->delete_blog($blog_id);
+            } else {
+                echo $blogController->show404Error();
+            }
+            break;
+
+
+
         default:
-            echo "error not found ";
+            echo $blogController->show404Error();
     }
 }

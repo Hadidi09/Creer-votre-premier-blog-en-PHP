@@ -1,0 +1,58 @@
+{% extends "base.html.twig" %}
+{% block title %}
+    Administration
+{% endblock %}
+{% block body %}
+    
+
+<div class="container-fluid mt-5">
+    <main class="row">
+    <h2 class="text-center ">Administration du blog </h2>
+        <div class="container mt-5">
+            <div class="row d-flex justify-content-center flex-column-reverse flex-md-row">
+                <div class="col-md-10 container-fluid rounded order-md-last content-col p-3 ">
+                    <div class="row row-cols-1 row-cols-md-2 ">
+                        <div class="col mb-3 d-flex justify-content-center align-items-center">
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">Blog_Posts</h5>
+                                    <p class="card-text">Consulter tous les blogs Posts</p>
+                                    <a href="/blog_admin" class="btn btn-primary">Gérer</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col mb-3 d-flex justify-content-center align-items-center">
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">Utilisateurs</h5>
+                                    <p class="card-text">Consulter tous les utilisateurs</p>
+                                    <a href="/gerer_utilisateurs" class="btn btn-primary">Gérer</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col mb-3 d-flex justify-content-center align-items-center">
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">Commentaires</h5>
+                                    <p class="card-text">Consulter tous les commentaires</p>
+                                    <a href="/gerer_commentaires" class="btn btn-primary">Gérer</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-2 aside-col rounded align-items-center justify-content-center">
+                    <ul class="navbar-nav container-fluid gap-4 my-4 me-auto">
+                        <a href="/blog_admin" class="btn btn-primary">Gérer les Blog_Posts</a> 
+                       <a href="/gerer_commentaires" class="btn btn-primary">Gérer les commentaires</a>  
+                        <a href="/gerer_utilisateurs" class="btn btn-primary">Gérer les Utilisateurs</a>  
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+{% endblock %}

@@ -73,7 +73,6 @@ li {
 
 .card {
   background-color: #064534;
-  border: 2px solid #064534;
 }
 
 .card-header {
@@ -82,7 +81,6 @@ li {
 }
 
 .card-body {
-  background-color: #e88013;
   color: #fff;
   border-radius: 15px;
   display: flex;
@@ -117,3 +115,28 @@ li {
   background-color: #e88013;
   border-radius: 15px;
 }
+.content-col {
+  display: flex;
+  justify-content: center;
+  height: 75vh;
+  flex-wrap: wrap;
+}
+
+.aside-col {
+  background-color: #01241a;
+}
+.form-blog {
+  background-color: #e88013 !important;
+  color: #fff !important;
+}
+
+// case "/update_blog_id":
+//     if (isset($_GET['id'])) {
+
+//         $blog_id = $_GET['id'];
+//         echo $blogController->Blog_post_Id($blog_id);
+//     } else {
+
+//         echo "";
+//     }
+//     break;
