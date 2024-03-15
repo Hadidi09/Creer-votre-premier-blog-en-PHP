@@ -14,7 +14,10 @@ abstract class Controller
     public function __construct()
     {
         $this->loader = new FilesystemLoader(ROOT . '/blog-php/templates');
-        $this->twig = new Environment($this->loader);
+        $this->twig = new Environment($this->loader, [
+            'debug' => true,
+        ]);
+        $this->twig->addExtension(new \Twig\Extension\DebugExtension());
     }
 
     protected function renderTwigView($view, $data = [])

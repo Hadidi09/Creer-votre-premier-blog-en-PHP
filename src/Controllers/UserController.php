@@ -12,7 +12,7 @@ ini_set('display_errors', 1);
 class UserController extends Controller
 {
 
-    public $userModel;
+    private $userModel;
 
     public function __construct()
     {
@@ -20,7 +20,7 @@ class UserController extends Controller
         $this->userModel = new UserModel();
     }
 
-    public function UserSignupForm()
+    public function userSignupForm()
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $lastName = $_POST["lastname"];
@@ -46,7 +46,7 @@ class UserController extends Controller
         }
         $this->renderTwigView('user/inscription.html.twig');
     }
-    public function UserLoginForm()
+    public function userLoginForm()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Check email

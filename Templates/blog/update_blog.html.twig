@@ -1,0 +1,63 @@
+{% extends "base.html.twig" %}
+{% block title %}
+    Modifier le blog_post
+{% endblock %}
+{% block body %}
+    
+
+<div class="container-fluid mt-5">
+    <main class="row">
+        <h2 class="text-center">Administration du blog</h2>
+        <div class="container mt-5">
+            <div class="row d-flex justify-content-center gap-1 flex-column-reverse flex-md-row-reverse">
+                <div class="col-md-12 col-lg-8 form-blog rounded">
+                    <div class="container-fluid   p-4">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8 col-md-10">
+                              {% for blog_post in blog %}
+                                <form class="" action="/update_blog_id/{{blog_post.id}} " method="post" enctype="multipart/form-data">
+                                    <div class="mb-3">
+                                        <label for="title" class="form-label">Titre</label>
+                                        <input type="text" class="form-control" value="{{ blog_post.titre }}" id="title" name="title" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="chapo" class="form-label">Chapo</label>
+                                        <input type="text" class="form-control" value="{{ blog_post.chapo }}" id="chapo" name="chapo" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="content" class="form-label">Contenu</label>
+                                        <textarea class="form-control" id="content" name="content" rows="10" required>{{ blog_post.contenu }}</textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="image" class="form-label">Image</label>
+                                        <img src="{{ '../../public/uploads/' ~ blog_post.image}}" name="image" alt="image de l'article {{blog_post.titre}}" srcset="">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="Remplacer l'image" class="form-label">Remplacer l'image</label>
+                                        <input type="file" class="form-control" id="image" name="file" >
+                                    </div>
+                                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                        <button type="submit" name="envoyer" class="btn btn-primary me-md-2">Modifier</button>
+                                        <a href="/blog_admin" class="btn btn-secondary">Annuler</a>
+                                    </div>
+                                </form>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 aside-col rounded col-lg-3 pt-4 my-4 mt-lg-0">
+                    <div class="container-fluid  ">
+                        <ul class="navbar-nav container-fluid gap-4">
+                            <a href="/blog_admin" class="btn btn-primary">Gérer les Blog_Posts</a> 
+                            <a href="/gerer_commentaires" class="btn btn-primary">Gérer les commentaires</a>  
+                            <a href="/gerer_utilisateurs" class="btn btn-primary">Gérer les Utilisateurs</a>  
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+{% endblock %}
+

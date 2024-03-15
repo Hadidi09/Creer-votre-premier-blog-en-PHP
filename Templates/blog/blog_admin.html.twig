@@ -1,0 +1,44 @@
+{% extends "base.html.twig" %}
+{% block title %}
+    Administration des blogs
+{% endblock %}
+{% block body %}
+    
+
+<div class="container-fluid mt-5">
+    <h2 class="text-center">Administration du blog</h2>
+    <div class="container-fluid mt-5">
+         <a href="/nouveau_blog_post" class="btn btn-primary text-center sticky-top">Créer un nouveau blog_post</a>  
+
+        <div class="row d-flex justify-content-center flex-column-reverse flex-md-row-reverse">
+            <div class="col-md-12 col-lg-9 mb-3">
+                <div class="container-fluid rounded p-3">
+                    <div class="row g-3">
+                        {% for  blog in blogs %}
+                            <div class="card mb-3 mx-2" style="max-width: 30rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">{{ blog.titre }}</h5>
+                                    <img src="{{ '../../public/uploads/' ~ blog.image }}" class="card-img-top img-fluid" alt="Image de l'article">
+                                    <p class="card-text">{{ blog.chapo }}</p>
+                                    <div class="d-grid gap-2 d-md-flex justify-content-md-center my-3">
+                                        <a href="/update_blog_id/{{ blog.id }}" class="btn btn-primary">Modifier</a>
+                                        <a href="/delete_blog_admin?id={{ blog.id }}" class="btn btn-primary">Supprimer</a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 col-lg-3 aside-col my-2 rounded">
+                <ul class="navbar-nav container-fluid gap-4 my-4 me-auto">
+                    <li class="nav-item"><a href="/blog_admin" class="btn btn-primary d-block">Gérer les Blog_Posts</a></li>
+                    <li class="nav-item"><a href="/blog_commentaires" class="btn btn-primary d-block">Gérer les commentaires</a></li>
+                    <li class="nav-item"><a href="/blog_utilisateurs" class="btn btn-primary d-block">Gérer les Utilisateurs</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
