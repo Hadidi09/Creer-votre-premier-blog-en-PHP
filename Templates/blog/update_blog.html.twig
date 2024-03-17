@@ -15,7 +15,7 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-8 col-md-10">
                               {% for blog_post in blog %}
-                                <form class="" action="/update_blog_id/{{blog_post.id}} " method="post" enctype="multipart/form-data">
+                                <form class="" action=" " method="post" enctype="multipart/form-data">
                                     <div class="mb-3">
                                         <label for="title" class="form-label">Titre</label>
                                         <input type="text" class="form-control" value="{{ blog_post.titre }}" id="title" name="title" required>
@@ -37,7 +37,7 @@
                                         <input type="file" class="form-control" id="image" name="file" >
                                     </div>
                                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                        <button type="submit" name="envoyer" class="btn btn-primary me-md-2">Modifier</button>
+                                        <button type="submit" name="modifier" class="btn btn-primary me-md-2">Modifier</button>
                                         <a href="/blog_admin" class="btn btn-secondary">Annuler</a>
                                     </div>
                                 </form>

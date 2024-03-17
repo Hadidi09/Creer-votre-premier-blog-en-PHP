@@ -130,13 +130,18 @@ li {
   color: #fff !important;
 }
 
-// case "/update_blog_id":
-//     if (isset($_GET['id'])) {
+.comment {
+  background-color: #064534;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 35rem;
+}
 
-//         $blog_id = $_GET['id'];
-//         echo $blogController->Blog_post_Id($blog_id);
-//     } else {
+/* .comment-content {
+  margin-bottom: 5px;
+}
 
-//         echo "";
-//     }
-//     break;
+.comment-details {
+  color: #666;
+} */

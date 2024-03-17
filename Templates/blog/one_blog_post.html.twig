@@ -1,0 +1,63 @@
+{% extends "base.html.twig" %}
+{% block title %}
+    Article de blog
+{% endblock %}
+{% block body %}
+    
+
+<div class="container-fluid mt-5">
+    <h2 class="text-center">Actualités</h2>
+    <div class="container-fluid mt-5">
+
+        <div class="row d-flex justify-content-center flex-column-reverse flex-md-row">
+            <div class="col-md-12 col-lg-9 mb-3">
+                <div class="container-fluid rounded d-flex justify-content-center  p-3">
+                    <div class="row g-3">
+                        {% for  blog in blogs %}
+                            <div class="card mb-3 mx-2" style="max-width: 30rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">{{ blog.titre }}</h5>
+                                    <img src="{{ '../../public/uploads/' ~ blog.image }}" class="card-img-top img-fluid" alt="Image de l'article">
+                                    <p class="card-text">{{ blog.chapo }}</p>
+                                    
+                                    <div class="d-grid gap-2 d-md-flex justify-content-md-center my-3">
+                                       <p class="card-text">{{ blog.contenu }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                    <div class="card-footer d-flex justify-content-center flex-column align-items-center">
+                    <h6>Commentaires</h6>
+                        {% for  blog in blogs %}
+                            <form action="/addComment/{{ blog.id }}" method="post" style="width: 50%;">
+                                <textarea name="comment" class="form-control mb-2" rows="3" placeholder="Ajouter un commentaire"></textarea>
+                                <button type="submit" name="commenter" class="btn btn-primary">Commenter</button>
+                            </form>
+                        {% endfor %}
+                    {% for comment in comments %}
+                        <div class="comment d-flex flex-start rounded">
+                            <img class="rounded-circle shadow-1-strong me-3" src="https://img.freepik.com/photos-gratuite/rendu-3d-avatar-appel-zoom_23-2149556777.jpg?size=626&ext=jpg&ga=GA1.1.312850530.1686663477&semt=ais" alt="avatar" width="60" height="60" />
+                            <div class="w-100">
+                                <h6 class="fw-bold mb-1 text-white">{{ comment.prenom }}</h6>
+                                <div class="d-flex align-items-center mb-3">
+                                    <p class="mb-0">{{ comment.date }}</p>
+                                </div>
+                                <p class="mb-0">{{ comment.contenu }}</p>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+                    </div>
+            </div>
+           
+
+            <div class="col-md-12 col-lg-3 aside-col my-2 rounded">
+                 
+          </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
