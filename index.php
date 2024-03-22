@@ -96,9 +96,6 @@ if (!empty($method)  && !empty($path)) {
             }
             break;
 
-
-
-
         default:
             echo $blogController->show404Error();
     }

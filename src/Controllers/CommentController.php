@@ -29,8 +29,8 @@ class CommentController extends Controller
             $comments = $this->commentModel->insertComment($contenu, $status, $utilisateur_id, $blog_id);
 
             if ($comments) {
-                echo "commentaire envoyé avec succés";
-
+                // echo "commentaire envoyé avec succés";
+                $_SESSION['commentaire'] = "votre commentaire est en attente de validation par le modérateur";
                 header("Location: /blog_post/$blog_id");
             } else {
                 echo "rien ne marche encore";

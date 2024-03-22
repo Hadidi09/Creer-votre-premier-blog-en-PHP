@@ -191,12 +191,20 @@ class BlogController extends Controller
             echo "Échec de la suppression du blog post";
         }
     }
-    // Show details blog_post
+    // Show details one blog_post
     public function show_blog_post($blog_id)
     {
         $the_blog_post = $this->blogModel->get_Blog_post_Id($blog_id);
-        $comments = $this->commentModel->selectComment();
+        $comments = $this->commentModel->selectComment($blog_id);
+        $firstBlogs = $this->blogModel->displayFirstThreeBlog();
+        //var_dump($firstBlogs);
+        $notification = $_SESSION['commentaire'] ?? null;
+        if (isset($_SESSION['commentaire'])) {
+            // echo ($_SESSION['commentaire']);
+            unset($_SESSION['commentaire']);
+        }
+
         $base_url = "../public/";
-        $this->twig->display('blog/one_blog_post.html.twig', ['blogs' => $the_blog_post, "base_url" => $base_url, 'comments' => $comments]);
+        $this->twig->display('blog/one_blog_post.html.twig', ['blogs' => $the_blog_post, "base_url" => $base_url, 'comments' => $comments, 'asideblogs' => $firstBlogs, 'notification' => $notification]);
     }
 }

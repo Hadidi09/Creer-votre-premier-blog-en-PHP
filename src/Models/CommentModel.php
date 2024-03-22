@@ -32,16 +32,17 @@ class CommentModel extends Database
         }
     }
 
-    public function selectComment()
+    public function selectComment($blog_id)
     {
         try {
             $db = $this->getConnection();
             $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            $selectSql =  "SELECT utilisateur.prenom, commentaire.* FROM commentaire INNER JOIN utilisateur ON utilisateur.id = commentaire.utilisateur_id";
+            $selectSql =  "SELECT utilisateur.prenom, commentaire.* FROM commentaire INNER JOIN utilisateur ON utilisateur.id = commentaire.utilisateur_id WHERE commentaire.blog_id = :blog_id  ";
 
 
             $statement = $db->prepare($selectSql);
+            $statement->bindParam(':blog_id', $blog_id);
             $statement->execute();
 
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
