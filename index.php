@@ -1,4 +1,7 @@
 <?php
+
+use App\Controllers\CommentController;
+
 session_start();
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -24,7 +27,7 @@ if (!empty($method)  && !empty($path)) {
 
     $userController = new UserController();
     $blogController = new BlogController();
-
+    $commentController = new CommentController();
     switch ($get_Id[1]) {
         case "":
             echo $blogController->homePage();
@@ -46,6 +49,18 @@ if (!empty($method)  && !empty($path)) {
             break;
         case "blog_admin":
             echo $blogController->blog_Admin();
+            break;
+        case "blog_post":
+            if ($get_Id[1] === "blog_post" && isset($get_Id[2])) {
+
+                $blog_id = $get_Id[2];
+                if (isset($get_Id[1]) && $get_Id[1] === "blog_post") {
+                    echo $blogController->show_blog_post($blog_id);
+                } else {
+                    echo $blogController->show404Error();
+                }
+            }
+
             break;
         case "nouveau_blog_post":
             echo $blogController->createBlog_post();
@@ -69,8 +84,17 @@ if (!empty($method)  && !empty($path)) {
                 echo $blogController->show404Error();
             }
             break;
+        case "addComment":
+            if ($get_Id[1] === "addComment" && isset($get_Id[2])) {
 
-
+                $blog_id = $get_Id[2];
+                if (isset($get_Id[1]) && $get_Id[1] === "addComment" && !empty($blog_id)) {
+                    echo $commentController->insertComment($blog_id);
+                } else {
+                    echo $blogController->show404Error();
+                }
+            }
+            break;
 
         default:
             echo $blogController->show404Error();

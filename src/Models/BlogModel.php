@@ -23,6 +23,19 @@ class BlogModel extends Database
             return $result;
         }
     }
+    public function displayFirstThreeBlog()
+    {
+        $db = $this->getConnection();
+        $selectSql = "SELECT * FROM blog_post ORDER BY dateDeMisAJour DESC LIMIT 3";
+        $statement = $db->prepare($selectSql);
+        $statement->execute();
+
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        if ($result > 0) {
+            return $result;
+        }
+    }
     public function createBlog_Post($title, $chapo, $content, $image, $user_id)
     {
         $db = $this->getConnection();

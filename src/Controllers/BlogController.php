@@ -6,6 +6,7 @@ use App\Controllers\Controller;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 use App\Models\BlogModel;
+use App\Models\CommentModel;
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -13,10 +14,12 @@ ini_set('display_errors', 1);
 class BlogController extends Controller
 {
     private $blogModel;
+    private $commentModel;
     public function __construct()
     {
         parent::__construct();
         $this->blogModel = new BlogModel();
+        $this->commentModel = new CommentModel;
     }
 
     public function homePage()
@@ -59,19 +62,19 @@ class BlogController extends Controller
             }
         }
     }
-
+    // Show Admin page
     public function admin()
     {
         $this->renderTwigView("blog/admin.html.twig");
     }
-
+    // Admin all blog_post
     public function blog_Admin()
     {
         $blogs = $this->blogModel->displayBlog();
 
         $this->renderTwigView("blog/blog_admin.html.twig", ["blogs" => $blogs]);
     }
-
+    // create blog_post_id
     public function createBlog_post()
     {
 
@@ -115,21 +118,23 @@ class BlogController extends Controller
         }
         $this->renderTwigView("blog/creation_blog_post.html.twig");
     }
-
+    // page 404
     public function show404Error()
     {
         $this->renderTwigView("page404.html.twig");
     }
+    // Get blog_post_id
     public function Blog_post_Id($blog_id)
     {
         $blog_id = $this->blogModel->get_Blog_post_Id($blog_id);
 
         $this->renderTwigView("blog/update_blog.html.twig",  ["blog" => $blog_id]);
     }
+    // Update blog_post_id
     public function update_blog_post($blog_id)
     {
 
-        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["envoyer"])) {
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["modifier"])) {
             $title = $_POST['title'];
             $chapo = $_POST['chapo'];
             $content = $_POST['content'];
@@ -158,10 +163,10 @@ class BlogController extends Controller
                 $blog = $this->blogModel->get_Blog_post_Id($blog_id);
                 $image = $blog['image'];
             }
-            var_dump($image);
+            // var_dump($image);
             $create_blog = $this->blogModel->updateBlog_Post($blog_id, $title, $chapo, $content, $image, $user_id);
             if ($create_blog) {
-                header("Location: blog_admin");
+                header("Location: /blog_admin");
                 exit();
             } else {
                 echo "echec lors de l'ajout";
@@ -171,7 +176,7 @@ class BlogController extends Controller
         $blog_id = $this->blogModel->get_Blog_post_Id($blog_id);
         $this->renderTwigView("blog/update_blog.html.twig", ['blog' => $blog_id]);
     }
-
+    // Delete blog_post_id
     public function delete_blog($blog_id)
     {
         if (!isset($blog_id) || empty($blog_id)) {
@@ -180,10 +185,26 @@ class BlogController extends Controller
         }
         $success = $this->blogModel->deleteBlog($blog_id);
         if ($success) {
-            header("Location: /blog_admin");
+            header("Location: blog_admin");
             exit();
         } else {
             echo "Échec de la suppression du blog post";
         }
+    }
+    // Show details one blog_post
+    public function show_blog_post($blog_id)
+    {
+        $the_blog_post = $this->blogModel->get_Blog_post_Id($blog_id);
+        $comments = $this->commentModel->selectComment($blog_id);
+        $firstBlogs = $this->blogModel->displayFirstThreeBlog();
+        //var_dump($firstBlogs);
+        $notification = $_SESSION['commentaire'] ?? null;
+        if (isset($_SESSION['commentaire'])) {
+            // echo ($_SESSION['commentaire']);
+            unset($_SESSION['commentaire']);
+        }
+
+        $base_url = "../public/";
+        $this->twig->display('blog/one_blog_post.html.twig', ['blogs' => $the_blog_post, "base_url" => $base_url, 'comments' => $comments, 'asideblogs' => $firstBlogs, 'notification' => $notification]);
     }
 }

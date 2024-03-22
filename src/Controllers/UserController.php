@@ -32,13 +32,13 @@ class UserController extends Controller
             if ($this->userModel->userExists($email)) {
                 echo "Utilisateur existant, veuillez vous connecter.";
                 $this->twig->display('user/connexion.html.twig');
-                header("Location: /login");
+                header("Location: /connexion");
             } else {
                 $result = $this->userModel->insertDataUser($firstName, $lastName, $email, $password, $role);
 
                 if ($result) {
                     echo "Utilisateur inséré avec succès";
-                    header("Location: /login");
+                    header("Location: /");
                 } else {
                     echo "Erreur d'inscription de l'utilisateur";
                 }
@@ -79,7 +79,7 @@ class UserController extends Controller
     public function logout()
     {
         session_destroy();
-        header('/connexion');
+        header("Location: connexion");
         exit();
     }
 }
