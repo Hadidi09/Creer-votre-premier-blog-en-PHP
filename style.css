@@ -137,11 +137,11 @@ li {
   margin-bottom: 10px;
   width: 35rem;
 }
-
-/* .comment-content {
-  margin-bottom: 5px;
+.acceuil-main {
+  background-color: #e88013 !important;
+  color: #fff;
 }
-
-.comment-details {
-  color: #666;
-} */
+.chapo {
+  background-color: #e88013 !important;
+  font-size: 1rem;
+}
