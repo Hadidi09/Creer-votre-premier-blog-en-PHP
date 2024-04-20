@@ -8,21 +8,16 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 use App\Controllers\PostController;
-use App\Models\Database;
 use App\Controllers\UserController;
 
 require_once __DIR__ . '/vendor/autoload.php';
-
 define('ROOT', dirname(__DIR__));
-
-
 
 $method = $_SERVER['REQUEST_METHOD'];
 $path = $_SERVER['REQUEST_URI'];
 $get_Id = explode("/", $path);
 
 if (!empty($method)  && !empty($path)) {
-
     $userController = new UserController();
     $postController = new PostController();
     $commentController = new CommentController();
