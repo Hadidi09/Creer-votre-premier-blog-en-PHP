@@ -37,4 +37,34 @@ class CommentController extends Controller
             }
         }
     }
+
+    public function showComments()
+    {
+        $comments = $this->commentModel->selectAllComment();
+
+        $this->renderTwigView('blog/blog_comment.html.twig', ['comments' => $comments]);
+    }
+
+    public function validateComment($comment_id)
+    {
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["modifier"])) {
+            $validateComment = $this->commentModel->validateComment($comment_id);
+
+            if ($validateComment) {
+                header("Location: /blog_comment");
+            }
+        }
+    }
+    public function deleteComment($comment_id)
+    {
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["supprimer"])) {
+            $validateComment = $this->commentModel->deleteComment($comment_id);
+
+            if ($validateComment) {
+                header("Location: /blog_comment");
+            }
+        }
+    }
 }

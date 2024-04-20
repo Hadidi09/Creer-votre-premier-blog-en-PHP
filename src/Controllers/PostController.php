@@ -5,27 +5,28 @@ namespace App\Controllers;
 use App\Controllers\Controller;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
-use App\Models\BlogModel;
+use App\Models\PostModel;
 use App\Models\CommentModel;
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-class BlogController extends Controller
+class PostController extends Controller
 {
-    private $blogModel;
+    private $postModel;
     private $commentModel;
     public function __construct()
     {
         parent::__construct();
-        $this->blogModel = new BlogModel();
+        $this->postModel = new PostModel();
         $this->commentModel = new CommentModel;
     }
 
     public function homePage()
     {
         if (isset($_SESSION['connected']) && $_SESSION['connected'] == true) {
-            $this->renderTwigView('main/acceuil.html.twig');
+            $blogs = $this->postModel->displayFirstThreeBlog();
+            $this->renderTwigView('main/acceuil.html.twig', ['blogs' => $blogs]);
         } else {
             header('Location: connexion');
             exit();
@@ -70,9 +71,15 @@ class BlogController extends Controller
     // Admin all blog_post
     public function blog_Admin()
     {
-        $blogs = $this->blogModel->displayBlog();
+        $blogs = $this->postModel->displayBlog();
 
         $this->renderTwigView("blog/blog_admin.html.twig", ["blogs" => $blogs]);
+    }
+    public function show_blog_list()
+    {
+        $blogs = $this->postModel->displayBlog();
+
+        $this->renderTwigView("blog/blog_post_list.html.twig", ["blogs" => $blogs]);
     }
     // create blog_post_id
     public function createBlog_post()
@@ -103,7 +110,7 @@ class BlogController extends Controller
                     move_uploaded_file($tmpName, __DIR__ . DIRECTORY_SEPARATOR . "../../public/uploads/" . $file);
                 }
                 $image = $file;
-                $create_blog = $this->blogModel->createBlog_Post($title, $chapo, $content, $image, $user_id);
+                $create_blog = $this->postModel->createBlog_Post($title, $chapo, $content, $image, $user_id);
                 if ($create_blog) {
                     $_SESSION['message'] = '<div class="alert alert-success" role="alert">
                      <p class="">blog_post  ajouté avec succés ! </p>
@@ -126,7 +133,7 @@ class BlogController extends Controller
     // Get blog_post_id
     public function Blog_post_Id($blog_id)
     {
-        $blog_id = $this->blogModel->get_Blog_post_Id($blog_id);
+        $blog_id = $this->postModel->get_Blog_post_Id($blog_id);
 
         $this->renderTwigView("blog/update_blog.html.twig",  ["blog" => $blog_id]);
     }
@@ -160,11 +167,11 @@ class BlogController extends Controller
                 }
                 $image = $file;
             } else {
-                $blog = $this->blogModel->get_Blog_post_Id($blog_id);
-                $image = $blog['image'];
+                $blog = $this->postModel->get_Blog_post_Id($blog_id);
+                $image = $blog->getImage();
             }
             // var_dump($image);
-            $create_blog = $this->blogModel->updateBlog_Post($blog_id, $title, $chapo, $content, $image, $user_id);
+            $create_blog = $this->postModel->updateBlog_Post($blog_id, $title, $chapo, $content, $image, $user_id);
             if ($create_blog) {
                 header("Location: /blog_admin");
                 exit();
@@ -173,7 +180,7 @@ class BlogController extends Controller
             }
         }
 
-        $blog_id = $this->blogModel->get_Blog_post_Id($blog_id);
+        $blog_id = $this->postModel->get_Blog_post_Id($blog_id);
         $this->renderTwigView("blog/update_blog.html.twig", ['blog' => $blog_id]);
     }
     // Delete blog_post_id
@@ -183,7 +190,7 @@ class BlogController extends Controller
             echo "Identifiant du blog post non valide.";
             return;
         }
-        $success = $this->blogModel->deleteBlog($blog_id);
+        $success = $this->postModel->deleteBlog($blog_id);
         if ($success) {
             header("Location: blog_admin");
             exit();
@@ -194,10 +201,10 @@ class BlogController extends Controller
     // Show details one blog_post
     public function show_blog_post($blog_id)
     {
-        $the_blog_post = $this->blogModel->get_Blog_post_Id($blog_id);
+        $the_blog_post = $this->postModel->get_Blog_post_Id($blog_id);
         $comments = $this->commentModel->selectComment($blog_id);
-        $firstBlogs = $this->blogModel->displayFirstThreeBlog();
-        //var_dump($firstBlogs);
+        $firstBlogs = $this->postModel->displayFirstThreeBlog();
+
         $notification = $_SESSION['commentaire'] ?? null;
         if (isset($_SESSION['commentaire'])) {
             // echo ($_SESSION['commentaire']);
@@ -205,6 +212,6 @@ class BlogController extends Controller
         }
 
         $base_url = "../public/";
-        $this->twig->display('blog/one_blog_post.html.twig', ['blogs' => $the_blog_post, "base_url" => $base_url, 'comments' => $comments, 'asideblogs' => $firstBlogs, 'notification' => $notification]);
+        $this->twig->display('blog/one_blog_post.html.twig', ['blog' => $the_blog_post, "base_url" => $base_url, 'comments' => $comments, 'asideblogs' => $firstBlogs, 'notification' => $notification]);
     }
 }

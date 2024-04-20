@@ -1,0 +1,49 @@
+{% extends "base.html.twig" %}
+{% block title %}
+    Administration des commentaires
+{% endblock %}
+{% block body %}
+    
+
+<div class="container-fluid mt-5">
+    <h2 class="text-center">Administration des commentaires </h2>
+    <div class="container-fluid mt-5">
+        <div class="row d-flex justify-content-center flex-column-reverse flex-md-row-reverse">
+            <div class="col-md-12 col-lg-9 mb-3">
+                <div class="container-fluid rounded p-3">
+                    <div class="row g-3">
+                        {% for  comment in comments %}
+                            <div class="card mb-3 mx-2" style="max-width: 30rem;">
+                                <div class="card-body">
+                                    <p class="bg-dark rounded text-center">Auteur : {{comment.prenom}} {{ comment.nom}}</p>
+                                    <p class="card-text">{{ comment.contenu }}</p>
+                                    <p class="bg-secondary w-100 rounded text-center"> en attente de validation</p>
+                                    <div class="d-grid gap-2 d-md-flex justify-content-md-center my-3">
+                                    <form action="/validate_comment/{{ comment.id }}" method="POST">
+                                         <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                                         <button type="submit" name="modifier"class="btn btn-primary">Valider</button>
+                                    </form>
+                                    <form action="/delete_comment/{{ comment.id }}" method="POST">
+                                         <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                                         <button type="submit" name="supprimer"class="btn btn-primary">supprimer</button>
+                                    </form>
+                                        {# <a href="/update_comment_id/{{ comment.id }}" class="btn btn-primary">Valider</a> #}
+                                        {# <a href="/delete_comment_id/{{ comment.id }}" class="btn btn-primary">Supprimer</a> #}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 col-lg-3 aside-col my-2 rounded">
+                <ul class="navbar-nav container-fluid gap-4 my-4 me-auto">
+                    <li class="nav-item"><a href="/blog_admin" class="btn btn-primary d-block">Gérer les Blog_Posts</a></li>
+                    <li class="nav-item"><a href="/blog_commentaires" class="btn btn-primary d-block">Gérer les commentaires</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

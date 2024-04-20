@@ -2,15 +2,16 @@
 
 namespace App\Models;
 
+use App\Models\Entities\Post;
 use PDO;
 use PDOException;
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-class BlogModel extends Database
+class PostModel extends Database
 {
-    public function displayBlog()
+    public function displayBlog(): array
     {
         $db = $this->getConnection();
         $selectSql = "SELECT * FROM blog_post";
@@ -18,11 +19,14 @@ class BlogModel extends Database
         $statement->execute();
 
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-        if ($result > 0) {
-            return $result;
+        $all_post = array();
+        foreach ($result as $row) {
+            $post = new Post($row);
+            $all_post[] = $post;
         }
+        return $all_post;
     }
+
     public function displayFirstThreeBlog()
     {
         $db = $this->getConnection();
@@ -31,11 +35,17 @@ class BlogModel extends Database
         $statement->execute();
 
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $firstThreePosts = array();
 
-        if ($result > 0) {
-            return $result;
+        foreach ($result as $row) {
+            $post = new Post($row);
+
+            $firstThreePosts[] = $post;
         }
+
+        return $firstThreePosts;
     }
+
     public function createBlog_Post($title, $chapo, $content, $image, $user_id)
     {
         $db = $this->getConnection();
@@ -63,19 +73,22 @@ class BlogModel extends Database
         $statement->bindParam(":id", $id);
         $statement->execute();
 
-        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
 
-        if ($result > 0) {
-            return $result;
+        if ($result) {
+            $post = new Post($result);
+
+            return $post;
         } else {
-            echo " notihing in here";
+            echo "Pas de post trouvé";
             return null;
         }
     }
+
     public function updateBlog_Post($blog_id, $title, $chapo, $content, $image, $user_id)
     {
         $db = $this->getConnection();
-        $updateSql = "UPDATE blog_post SET  titre = :titre, chapo = :chapo, contenu = :contenu, image = :image, dateDeMisAjour = NOW(), utilisateur_id = :utilisateur_id WHERE id = :blog_id";
+        $updateSql = "UPDATE blog_post SET titre = :titre, chapo = :chapo, contenu = :contenu, image = :image, dateDeMisAJour = NOW(), utilisateur_id = :utilisateur_id WHERE id = :blog_id";
         $statement = $db->prepare($updateSql);
         $statement->bindParam(":blog_id", $blog_id);
         $statement->bindParam(":titre", $title);
@@ -86,25 +99,35 @@ class BlogModel extends Database
 
         try {
             $statement->execute();
-            return true;
+            if ($statement->rowCount() > 0) {
+                $post = $this->get_Blog_post_Id($blog_id);
+                return $post;
+            } else {
+                return null;
+            }
         } catch (PDOException $e) {
-            return false;
+            return null;
         }
     }
 
     public function deleteBlog($blog_id)
     {
-        $db = $this->getConnection();
-        $deleteSql = "DELETE FROM blog_post WHERE id = :blog_id";
-        $statement = $db->prepare($deleteSql);
-        $statement->bindParam(":blog_id", $blog_id);
+        $post = $this->get_Blog_post_Id($blog_id);
 
-        try {
-            $statement->execute();
+        if ($post) {
+            $db = $this->getConnection();
+            $deleteSql = "DELETE FROM blog_post WHERE id = :blog_id";
+            $statement = $db->prepare($deleteSql);
+            $statement->bindParam(":blog_id", $blog_id);
 
-            return true;
-        } catch (PDOException $e) {
-            return false;
+            try {
+                $statement->execute();
+                return $post;
+            } catch (PDOException $e) {
+                return null;
+            }
+        } else {
+            return null;
         }
     }
 }

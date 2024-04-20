@@ -1,62 +1,30 @@
 {% extends "base.html.twig" %}
 {% block title %}
-    Article de blog
+    Liste des blogs
 {% endblock %}
 {% block body %}
-    
-
-<div class="container-fluid mt-5">
-    <h2 class="text-center">Actualités</h2>
     <div class="container-fluid mt-5">
-     {% if notification is not null  %}
-        <div class="alert alert-success" role="alert">
-          <p class="text-black">{{notification}}</p> 
-        </div>
-     {% endif %}
-    
-        <div class="row d-flex justify-content-center flex-column-reverse flex-md-row">
-            <div class="col-md-12 col-lg-9 mb-3">
-                <div class="container-fluid rounded d-flex justify-content-center  p-3">
-                    <div class="row g-3">
-                            <div class="card mb-3 mx-2" style="max-width: 55rem;">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center">{{ blog.getTitre() }}</h5>
-                                    <img src="{{ '../../public/uploads/' ~ blog.getImage }}" class="card-img-top img-fluid" alt="Image de l'article">
-                                    <p class="card-text chapo my-2 rounded">{{ blog.getChapo() }}</p> 
-                                    <div class="d-grid gap-2 d-md-flex justify-content-md-center my-3">
-                                       <p class="card-text">{{ blog.getContenu ()}}</p>
+            <div class="container-fluid mt-5">
+                <div class="row">
+                    <div class="col-md-8 d-flex">
+                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                            {% for blog in blogs %}
+                                <div class="col mb-3">
+                                    <div class="card card-sizing ">
+                                        <div class="card-body rounded d-flex flex-column justify-content-between">
+                                            <h5 class="card-title text-white text-center">{{ blog.titre }}</h5>
+                                            <img src="{{ '../../public/uploads/' ~ blog.image }}" class="card-img-top img-fluid" style="height: 200px !important; object-fit: cover;" alt="Image de l'article">
+                                            <p class="card-text">{{ blog.contenu | slice(0,100) }}...</p>
+                                            <p class="card-text text-white"><small class="">Dernière modification le 01 janvier 2023</small></p>
+                                            <a href="/blog_post/{{ blog.id }}" class="btn btn-primary btn-read">Lire la suite</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            {% endfor %}
+                        </div>
                     </div>
-                </div>
-                    <div class="card-footer d-flex justify-content-center flex-column align-items-center">
-                    <h6>Commentaires</h6>
-                    <form action="/addComment/{{ blog.getId }}" method="post" style="width: 50%;display: flex;flex-direction: column;">
-                        <textarea name="comment" class="form-control mb-2" rows="3" placeholder="Ajouter un commentaire"></textarea>
-                        <button type="submit" name="commenter" class="btn btn-primary align-self-center">Commenter</button>
-                    </form>
-                        
-                    {% for comment in comments %}
-                        {% if comment.status is same as('1')%}
-                            <div class="comment d-flex flex-start rounded">
-                                <img class="rounded-circle shadow-1-strong me-3" src="https://img.freepik.com/photos-gratuite/rendu-3d-avatar-appel-zoom_23-2149556777.jpg?size=626&ext=jpg&ga=GA1.1.312850530.1686663477&semt=ais" alt="avatar" width="60" height="60" />
-                                <div class="w-100">
-                                    <h6 class="fw-bold mb-1 text-white">{{ comment.prenom }}</h6>
-                                    <div class="d-flex align-items-center mb-3">
-                                        <p class="mb-0">{{ comment.date }}</p>
-                                    </div>
-                                    <p class="mb-0">{{ comment.contenu }}</p>
-                                </div>
-                            </div>
-                        {% endif %}
-                    {% endfor %}
-                    </div>
-            </div>
-           
 
-            <div class="col-md-12 col-lg-3 aside-col my-2 rounded">
-                    
+                    <div class="col-md-4">
                         <div class="col mb-3">
                             <h3 class="text-center">A propos</h3>
                             <div class="card">
@@ -104,9 +72,8 @@
                                 </div>
                             </div>
                         {% endfor %}          
+                    </div>
+                </div>
             </div>
-            </div>
-        </div>
     </div>
-</div>
 {% endblock %}
