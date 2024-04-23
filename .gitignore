@@ -1,4 +1,4 @@
-src/models/Configuration.php
+.env
 vendor
 ./idea
 ./index.html

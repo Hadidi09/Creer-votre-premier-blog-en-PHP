@@ -1,13 +1,15 @@
 <div class="container-fluid">
     <div class="row d-flex justify-content-between py-4 py-lg-0">
-
+        
         <div class="col-lg-6 col-md-12 d-flex justify-content-between align-items-center mb-3">
             <img src="../public/img/logo-can.png" width="150" height="80" alt="logo de la can 2023" class="img-fluid">
+            {% if user.connected is same as('true')%}
             <a class="p-1 text-white d-flex flex-column justify-content-center align-items-center" href="/admin" target="_blank">
                 <i class="fa-solid fa-toolbox"></i><span class="d-flex">Page d'administration</span>
             </a>
+            {% endif %}
         </div>
-
+        
         <div class="col-lg-6 col-md-12 d-flex align-items-center justify-content-lg-end flex-column flex-lg-row">
             <ul class="m-0 p-1 d-flex justify-content-end list-unstyled list-inline pt-2 flex-wrap">
                 <li>
