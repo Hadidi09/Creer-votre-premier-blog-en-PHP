@@ -6,6 +6,11 @@
     
 
     <div class="container-fluid mt-5 full-height">
+            {% if message %}
+            <div class="alert alert-success fade show" role="alert">
+                <h4 class="alert-heading text-black">{{ message}}</h4>
+            </div>
+            {%  endif %}
         <h1 class="text-center">Formulaire de connexion</h1>
 
         <div class="row justify-content-center">

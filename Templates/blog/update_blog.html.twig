@@ -14,23 +14,23 @@
                     <div class="container-fluid   p-4">
                         <div class="row justify-content-center">
                             <div class="col-lg-8 col-md-10">
-                              {% for blog_post in blog %}
+                              {# {% for blog_post in blog %} #}
                                 <form class="" action=" " method="post" enctype="multipart/form-data">
                                     <div class="mb-3">
                                         <label for="title" class="form-label">Titre</label>
-                                        <input type="text" class="form-control" value="{{ blog_post.titre }}" id="title" name="title" required>
+                                        <input type="text" class="form-control" value="{{ blog.titre }}" id="title" name="title" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="chapo" class="form-label">Chapo</label>
-                                        <input type="text" class="form-control" value="{{ blog_post.chapo }}" id="chapo" name="chapo" required>
+                                        <input type="text" class="form-control" value="{{ blog.chapo }}" id="chapo" name="chapo" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="content" class="form-label">Contenu</label>
-                                        <textarea class="form-control" id="content" name="content" rows="10" required>{{ blog_post.contenu }}</textarea>
+                                        <textarea class="form-control" id="content" name="content" rows="10" required>{{ blog.contenu }}</textarea>
                                     </div>
                                     <div class="mb-3">
                                         <label for="image" class="form-label">Image</label>
-                                        <img src="{{ '../../public/uploads/' ~ blog_post.image}}" name="image" alt="image de l'article {{blog_post.titre}}" srcset="">
+                                        <img src="{{ '../../public/uploads/' ~ blog.image}}" name="image" alt="image de l'article {{blog_post.titre}}" srcset="">
                                     </div>
                                     <div class="mb-3">
                                         <label for="Remplacer l'image" class="form-label">Remplacer l'image</label>
@@ -41,7 +41,7 @@
                                         <a href="/blog_admin" class="btn btn-secondary">Annuler</a>
                                     </div>
                                 </form>
-                                {% endfor %}
+                                {# {% endfor %} #}
                             </div>
                         </div>
                     </div>

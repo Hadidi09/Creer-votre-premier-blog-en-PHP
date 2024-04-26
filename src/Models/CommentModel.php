@@ -13,7 +13,8 @@ class CommentModel extends Database
         $db = $this->getConnection();
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $insertSql = "INSERT INTO commentaire (contenu, status, date, utilisateur_id, blog_id) VALUES (:contenu, :status, NOW(), :utilisateur_id, :blog_id)";
+        $insertSql = "INSERT INTO commentaire (contenu, status, date, utilisateur_id, blog_id) 
+        VALUES (:contenu, :status, NOW(), :utilisateur_id, :blog_id)";
         $statement = $db->prepare($insertSql);
         $statement->bindParam(':contenu', $contenu);
         $statement->bindParam(':status', $status);
@@ -62,7 +63,8 @@ class CommentModel extends Database
             $db = $this->getConnection();
             $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            $selectSql =  "SELECT utilisateur.prenom, commentaire.* FROM commentaire INNER JOIN utilisateur ON utilisateur.id = commentaire.utilisateur_id WHERE commentaire.blog_id = :blog_id  ";
+            $selectSql =  "SELECT utilisateur.prenom, commentaire.* FROM commentaire INNER JOIN 
+            utilisateur ON utilisateur.id = commentaire.utilisateur_id WHERE commentaire.blog_id = :blog_id  ";
 
             $statement = $db->prepare($selectSql);
             $statement->bindParam(':blog_id', $blog_id);

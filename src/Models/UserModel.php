@@ -30,6 +30,7 @@ class UserModel extends Database
 
         try {
             $statement->execute();
+            $_SESSION['message'] = "Vous êtes maintenant inscrit, connectez vous";
             return true;
         } catch (PDOException $e) {
             echo "Erreur d'insertion : " . $e->getMessage();

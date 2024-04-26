@@ -68,18 +68,23 @@ class UserController extends Controller
 
             if ($authenticated) {
                 echo 'connexion reussie !';
+
                 header('Location: /');
+                $_SESSION['message'] = "connexion réussie";
             } else {
                 echo 'Mauvaise combinaison email/mot de passe';
             }
         }
+
+
         $this->renderTwigView('user/connexion.html.twig');
     }
 
     public function logout()
     {
-        session_destroy();
+        unset($_SESSION['connected']);
         header("Location: connexion");
+        $_SESSION['message'] = "deconnexion";
         exit();
     }
 }

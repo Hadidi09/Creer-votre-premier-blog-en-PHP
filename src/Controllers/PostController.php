@@ -26,6 +26,9 @@ class PostController extends Controller
     {
         if (isset($_SESSION['connected']) && $_SESSION['connected'] == true) {
             $blogs = $this->postModel->displayFirstThreeBlog();
+            if (isset($_SESSION['message'])) {
+                unset($_SESSION['message']);
+            }
             $this->renderTwigView('main/acceuil.html.twig', ['blogs' => $blogs]);
         } else {
             header('Location: connexion');
@@ -56,6 +59,7 @@ class PostController extends Controller
                 $_POST['lastname'] = '';
                 $_POST['email'] = '';
                 $_POST['message'] = '';
+                $_SESSION['message'] = "Mail envoyé avec succés";
                 header('Location: /');
                 exit();
             } catch (Exception $e) {
@@ -145,7 +149,7 @@ class PostController extends Controller
             $title = $_POST['title'];
             $chapo = $_POST['chapo'];
             $content = $_POST['content'];
-            $user_id = 1;
+            $user_id = $blog_id;
 
             if (!empty($_FILES['file']['tmp_name'])) {
                 $tmpName = $_FILES['file']['tmp_name'];
@@ -181,6 +185,7 @@ class PostController extends Controller
         }
 
         $blog_id = $this->postModel->get_Blog_post_Id($blog_id);
+        //var_dump($blog_id);
         $this->renderTwigView("blog/update_blog.html.twig", ['blog' => $blog_id]);
     }
     // Delete blog_post_id

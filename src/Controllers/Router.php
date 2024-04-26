@@ -53,43 +53,34 @@ class Router
                     if ($get_Id[1] === "blog_post" && isset($get_Id[2])) {
 
                         $blog_id = $get_Id[2];
-                        if (isset($get_Id[1]) && $get_Id[1] === "blog_post") {
+                        if ($get_Id[1] === "blog_post") {
                             print_r($postController->show_blog_post($blog_id));
-                        } else {
-                            print_r($postController->show404Error());
                         }
                     }
-
                     break;
                 case "nouveau_blog_post":
                     print_r($postController->createBlog_post());
                     break;
                 case "update_blog_id":
-                    if ($get_Id[1] === "update_blog_id" && isset($get_Id[2])) {
+                    if (isset($get_Id[2])) {
                         $blog_id = $get_Id[2];
-                        if (isset($get_Id[1]) && $get_Id[1] === "update_blog_id") {
+                        if ($get_Id[1] === "update_blog_id") {
                             print_r($postController->update_blog_post($blog_id));
-                        } else {
-                            print_r($postController->show404Error());
                         }
                     }
                     break;
                 case "delete_blog_id":
-                    if (isset($get_Id[1]) && isset($get_Id[2])) {
+                    if (isset($get_Id[2])) {
                         $blog_id = $get_Id[2];
                         print_r($postController->delete_blog($blog_id));
-                    } else {
-                        print_r($postController->show404Error());
                     }
                     break;
                 case "addComment":
-                    if ($get_Id[1] === "addComment" && isset($get_Id[2])) {
+                    if (isset($get_Id[2])) {
 
                         $blog_id = $get_Id[2];
                         if (isset($get_Id[1]) && $get_Id[1] === "addComment" && !empty($blog_id)) {
                             print_r($commentController->insertComment($blog_id));
-                        } else {
-                            print_r($postController->show404Error());
                         }
                     }
                     break;
@@ -100,10 +91,8 @@ class Router
                     if ($get_Id[1] === "validate_comment" && isset($get_Id[2])) {
 
                         $comment_id = $get_Id[2];
-                        if (isset($get_Id[1]) && $get_Id[1] === "validate_comment") {
+                        if ($get_Id[1] === "validate_comment") {
                             print_r($commentController->validateComment($comment_id));
-                        } else {
-                            print_r($postController->show404Error());
                         }
                     }
                     print_r($commentController->showComments());
@@ -112,10 +101,8 @@ class Router
                     if ($get_Id[1] === "delete_comment" && isset($get_Id[2])) {
 
                         $comment_id = $get_Id[2];
-                        if (isset($get_Id[1]) && $get_Id[1] === "delete_comment") {
+                        if ($get_Id[1] === "delete_comment") {
                             print_r($commentController->deleteComment($comment_id));
-                        } else {
-                            print_r($postController->show404Error());
                         }
                     }
                     print_r($commentController->showComments());
